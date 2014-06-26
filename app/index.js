@@ -164,7 +164,9 @@ module.exports = yeoman.generators.Base.extend({
     this.mkdir('app/scripts');
     this.mkdir('app/styles');
     this.mkdir('app/images');
+    this.mkdir('app/inc');
     this.write('app/index.html', this.indexFile);
+    this.write('app/inc/_part.html', 'I am just a part');
 
     if (this.coffee) {
       this.write(
