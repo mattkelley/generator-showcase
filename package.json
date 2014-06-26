@@ -1,7 +1,7 @@
 {
   "name": "generator-showcase",
-  "version": "0.0.0",
-  "description": "Yeoman generator",
+  "version": "0.0.1",
+  "description": "Scaffold tool for Invodo ShowCases",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "mattkelley/generator-showcase",
@@ -11,25 +11,37 @@
     "url": "https://github.com/mattkelley"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.10.0",
+    "npm": ">=1.2.10"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --reporter spec"
   },
   "files": [
     "app"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "mobile",
+    "app",
+    "front-end",
+    "h5bp",
+    "modernizr",
+    "jquery",
+    "grunt"
   ],
   "dependencies": {
     "yeoman-generator": "~0.16.0",
-    "chalk": "~0.4.0"
+    "chalk": "^0.4.0",
+    "cheerio": "^0.17.0",
+    "yosay": "^0.2.0"
   },
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "*",
+    "underscore": "^1.6.0"
   },
   "peerDependencies": {
-    "yo": ">=1.0.0"
+    "yo": ">=1.2.0",
+    "generator-mocha": ">=0.1.0"
   }
 }
