@@ -106,6 +106,10 @@ module.exports = yeoman.generators.Base.extend({
     this.copy('jshintrc', '.jshintrc');
   },
 
+  partialHTML: function () {
+    this.copy('_partial.html', 'inc/_partial.html');
+  },
+
   editorConfig: function () {
     this.copy('editorconfig', '.editorconfig');
   },
