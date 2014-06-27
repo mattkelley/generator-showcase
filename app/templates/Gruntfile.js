@@ -65,14 +65,14 @@ module.exports = function (grunt) {
 				tasks: ['newer:copy:styles', 'autoprefixer']
 			},
 			htmlincludes: {
-				files: ['<%= config.app %>/inc/*.html'],
+				files: ['<%%= config.app %>/inc/*.html'],
 				tasks: ['includereplace:dist'],
 				options: {
 					livereload: true
 				}
 			},
 			html: {
-				files: ['<%= config.app %>/{,*/}*.html'],
+				files: ['<%%= config.app %>/{,*/}*.html'],
 				tasks: ['newer:includereplace:dist'],
 				options: {
 					livereload: true
@@ -97,7 +97,7 @@ module.exports = function (grunt) {
 				options: {
 					prefix: '<!-- @@',
 					suffix: ' -->',
-					includesDir: '<%= config.app %>/'
+					includesDir: '<%%= config.app %>/'
 				},
 				files: [{
 					src: [
@@ -106,7 +106,7 @@ module.exports = function (grunt) {
 					],
 					dest: '.tmp',
 					expand: true,
-					cwd: '<%= config.app %>/'
+					cwd: '<%%= config.app %>/'
 				}]
 			}
 		},
@@ -404,7 +404,7 @@ module.exports = function (grunt) {
 					dot: true,
 					cwd: '.tmp',
 					src: '{,*/}*.html',
-					dest: '<%= config.dist %>'
+					dest: '<%%= config.dist %>'
 				}<% if (includeBootstrap) { %>, {
 					expand: true,
 					dot: true,
