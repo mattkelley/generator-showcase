@@ -1,0 +1,66 @@
+<!doctype html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<title><%= appname %></title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, user-scalable=0">
+		<!-- build:css(.) styles/vendor.css -->
+		<!-- bower:css -->
+		<% if (includeBootstrap && !includeSass) { %><link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"><% } %>
+		<!-- endbower -->
+		<!-- endbuild -->
+		<!-- build:css(.tmp) styles/main.css -->
+		<link rel="stylesheet" href="styles/main.css">
+		<!-- endbuild --><% if (includeModernizr) { %>
+		<!-- build:js scripts/vendor/modernizr.js -->
+		<script src="bower_components/modernizr/modernizr.js"></script>
+		<!-- endbuild -->
+		<% } %>
+	</head>
+	<body>
+
+		<% if (includeBootstrap) { %>
+		<div class="container">
+			<div class="header">
+				<ul class="nav nav-pills pull-right">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+				<h3 class="text-muted"><%= appname %></h3>
+			</div>
+
+			<div class="jumbotron">
+				<h1>'Allo, 'Allo!</h1>
+				<p class="lead">Always a pleasure scaffolding your apps.</p>
+				<p><a class="btn btn-lg btn-success" href="#">Splendid! <span class="glyphicon glyphicon-ok"></span></a></p>
+			</div>
+
+			<!-- @@include('inc/_part.html', {"hello":"I am var passed by index.html"}) -->
+
+			<div class="footer">
+				<p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+			</div>
+
+		</div>
+		<% } else { %>
+		<div class="hero-unit">
+			<h1>'Allo, 'Allo!</h1>
+			<p>You now have</p>
+			<ul>
+			<li>HTML5 Boilerplate</li>
+			<% if (includeSass) { %><li>Sass</li><% } %>
+			<% if (includeModernizr) { %><li>Modernizr</li><% } %>
+			</ul>
+		</div>
+		<% } %>
+
+		<!-- build:js(.) scripts/vendor.js -->
+		<!-- bower:js -->
+		<script src="bower_components/jquery/dist/jquery.js"></script>
+		<!-- endbower -->
+		<!-- endbuild -->
+
+	</body>
+</html>
