@@ -49,11 +49,11 @@ module.exports = yeoman.generators.Base.extend({
       },{
         name: 'Sass',
         value: 'includeSass',
-        checked: false
+        checked: true
       },{
         name: 'Modernizr',
         value: 'includeModernizr',
-        checked: false
+        checked: true
       }]
     }, {
       when: function (answers) {
@@ -64,7 +64,7 @@ module.exports = yeoman.generators.Base.extend({
       value: 'includeLibSass',
       message: 'Would you like to use libsass? Read up more at \n' +
         chalk.green('https://github.com/andrew/node-sass#node-sass'),
-      default: false
+      default: true
     }];
 
     this.prompt(prompts, function (answers) {
@@ -104,10 +104,6 @@ module.exports = yeoman.generators.Base.extend({
 
   jshint: function () {
     this.copy('jshintrc', '.jshintrc');
-  },
-
-  partialHTML: function () {
-    this.copy('_partial.html', 'inc/_partial.html');
   },
 
   editorConfig: function () {
@@ -169,8 +165,8 @@ module.exports = yeoman.generators.Base.extend({
     this.mkdir('app/styles');
     this.mkdir('app/images');
     this.mkdir('app/inc');
+    this.copy('_partial.html', 'app/inc/_partial.html');
     this.write('app/index.html', this.indexFile);
-    this.write('app/inc/_part.html', 'I am just a part');
 
     if (this.coffee) {
       this.write(
