@@ -47,24 +47,14 @@ module.exports = yeoman.generators.Base.extend({
         value: 'includeBootstrap',
         checked: true
       },{
-        name: 'Sass',
-        value: 'includeSass',
-        checked: true
+        name: 'jQuery',
+        value: 'includejQuery',
+        checked: false
       },{
         name: 'Modernizr',
         value: 'includeModernizr',
         checked: true
       }]
-    }, {
-      when: function (answers) {
-        return answers.features.indexOf('includeSass') !== -1;
-      },
-      type: 'confirm',
-      name: 'libsass',
-      value: 'includeLibSass',
-      message: 'Would you like to use libsass? Read up more at \n' +
-        chalk.green('https://github.com/andrew/node-sass#node-sass'),
-      default: true
     }];
 
     this.prompt(prompts, function (answers) {
@@ -74,12 +64,12 @@ module.exports = yeoman.generators.Base.extend({
         return features && features.indexOf(feat) !== -1;
       }
 
-      this.includeSass = hasFeature('includeSass');
+      // this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
 
-      this.includeLibSass = answers.libsass;
-      this.includeRubySass = !answers.libsass;
+      // this.includeLibSass = answers.libsass;
+      // this.includeRubySass = !answers.libsass;
 
       done();
     }.bind(this));
@@ -115,8 +105,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   mainStylesheet: function () {
-    var css = 'main.' + (this.includeSass ? 's' : '') + 'css';
-    this.template(css, 'app/styles/' + css);
+    this.template('main.scss', 'app/styles/main.scss');
   },
 
   writeIndex: function () {
@@ -125,10 +114,7 @@ module.exports = yeoman.generators.Base.extend({
 
     // wire Bootstrap plugins
     if (this.includeBootstrap) {
-      var bs = 'bower_components/bootstrap';
-      bs += this.includeSass ?
-        '-sass-official/vendor/assets/javascripts/bootstrap/' : '/js/';
-
+      var bs = 'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/';
       this.indexFile = this.appendFiles({
         html: this.indexFile,
         fileType: 'js',
