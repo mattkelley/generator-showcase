@@ -265,21 +265,19 @@ module.exports = function (grunt) {
 				}]
 			}
 		},
-
-		// Automatically inject Bower components into the HTML file
-		wiredep: {
-			app: {
-				ignorePath: new RegExp('^<%%= config.app %>/|../'),
-				src: ['<%%= config.app %>/index.html']<% if (includeBootstrap) { %>,<% if (includeSass) { %>
-				exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']<% } else { %>
-				exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']<% } } %>
-			}<% if (includeSass) { %>,
-			sass: {
-				src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
-				ignorePath: /(\.\.\/){1,2}bower_components\//
-			}<% } %>
-		},
-
+    // Automatically inject Bower components into the HTML file
+    wiredep: {
+      app: {
+        ignorePath: /^<%= config.app %>\/|\.\.\//,
+        src: ['<%%= config.app %>/index.html']<% if (includeBootstrap) { %>,<% if (includeSass) { %>
+        exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']<% } else { %>
+        exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']<% } } %>
+      }<% if (includeSass) { %>,
+      sass: {
+        src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
+        ignorePath: /(\.\.\/){1,2}bower_components\//
+      }<% } %>
+    },
 		// Renames files for browser caching purposes
 		rev: {
 			dist: {

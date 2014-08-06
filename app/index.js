@@ -63,11 +63,12 @@ module.exports = yeoman.generators.Base.extend({
       function hasFeature(feat) {
         return features && features.indexOf(feat) !== -1;
       }
-
+      this.includeSass = true;
       // this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
 
+      this.includeLibSass = true;
       // this.includeLibSass = answers.libsass;
       // this.includeRubySass = !answers.libsass;
 
@@ -88,9 +89,32 @@ module.exports = yeoman.generators.Base.extend({
     this.copy('gitattributes', '.gitattributes');
   },
 
+  // bower: function () {
+  //   this.template('_bower.json', 'bower.json');
+  // },
+
   bower: function () {
-    this.template('_bower.json', 'bower.json');
+    var bower = {
+      name: this._.slugify(this.appname),
+      private: true,
+      dependencies: {}
+    };
+
+    if (this.includeBootstrap) {
+      var bs = 'bootstrap-sass-official';
+      bower.dependencies[bs] = "~3.2.0";
+    } else {
+      bower.dependencies.jquery = "~1.11.1";
+    }
+
+    if (this.includeModernizr) {
+      bower.dependencies.modernizr = "~2.8.2";
+    }
+
+    this.write('bower.json', JSON.stringify(bower, null, 2));
   },
+
+
 
   jshint: function () {
     this.copy('jshintrc', '.jshintrc');
@@ -111,31 +135,6 @@ module.exports = yeoman.generators.Base.extend({
   writeIndex: function () {
     this.indexFile = this.readFileAsString(join(this.sourceRoot(), 'index.html'));
     this.indexFile = this.engine(this.indexFile, this);
-
-    // wire Bootstrap plugins
-    if (this.includeBootstrap) {
-      var bs = 'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/';
-      this.indexFile = this.appendFiles({
-        html: this.indexFile,
-        fileType: 'js',
-        optimizedPath: 'scripts/plugins.js',
-        sourceFileList: [
-          bs + 'affix.js',
-          bs + 'alert.js',
-          bs + 'dropdown.js',
-          bs + 'tooltip.js',
-          bs + 'modal.js',
-          bs + 'transition.js',
-          bs + 'button.js',
-          bs + 'popover.js',
-          bs + 'carousel.js',
-          bs + 'scrollspy.js',
-          bs + 'collapse.js',
-          bs + 'tab.js'
-        ],
-        searchPath: '.'
-      });
-    }
 
     this.indexFile = this.appendFiles({
       html: this.indexFile,

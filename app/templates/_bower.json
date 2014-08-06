@@ -3,9 +3,9 @@
   "private": true,
   "dependencies": {
 		<% if (includeBootstrap) {
-		"bootstrap-sass-official": "~3.1.0",<% } %>
-    <% }} if (includeModernizr) { %>
-    "modernizr": "~2.8.2",<% } %>
+		"bootstrap-sass-official": "~3.1.0",<% }} %>
+    <% if (includeModernizr) { %>
+    "modernizr": "~2.8.2",<% }} %>
     "jquery": "~1.11.1"
   },
   "devDependencies": {}
