@@ -144,6 +144,8 @@ module.exports = function (grunt) {
 					dot: true,
 					src: [
 						'.tmp',
+						'html/*'
+						'html.zip',
 						'<%%= config.dist %>/*',
 						'!<%%= config.dist %>/.git*'
 					]
@@ -328,6 +330,19 @@ module.exports = function (grunt) {
 		//   dist: {}
 		// },
 
+		compress: {
+			dist: {
+				options: {
+					archive: 'html.zip'
+				},
+				files: [{
+					expand: true,
+					cwd: '<%%= config.dist %>',
+					src: ['**'],
+					dest: 'html/'}
+				]
+			}
+		},
 		// Copies remaining files to places other tasks can use
 		copy: {
 			dist: {
@@ -430,7 +445,8 @@ module.exports = function (grunt) {
 		'copy:dist',
 		'rev',
 		'usemin',
-		'htmlmin'
+		'htmlmin',
+		'compress'
 	]);
 
 	grunt.registerTask('default', [
