@@ -1,34 +1,27 @@
 <!doctype html>
-<html class="no-js">
-	<head>
-		<meta charset="utf-8">
-		<title><%= appname %></title>
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, user-scalable=0">
-		<!-- build:css(.) styles/vendor.css -->
-		<!-- bower:css -->
-		<% if (includeBootstrap && !includeSass) { %><link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"><% } %>
-		<!-- endbower -->
-		<!-- endbuild -->
-		<!-- build:css(.tmp) styles/main.css -->
-		<link rel="stylesheet" href="styles/main.css">
-		<!-- endbuild --><% if (includeModernizr) { %>
-		<!-- build:js scripts/vendor/modernizr.js -->
-		<script src="bower_components/modernizr/modernizr.js"></script>
-		<!-- endbuild -->
-		<% } %>
-	</head>
-	<body>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title><%= appname %></title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, user-scalable=0">
 
-		<h3><%= appname %></h3>
+	<!-- build:css(.tmp) styles/main.css -->
+	<link rel="stylesheet" href="styles/main.css">
+	<!-- endbuild -->
 
-		<!-- @@include('inc/_partial.html', {"hello":"WORLD!"}) -->
+</head>
+<body>
 
-		<!-- build:js(.) scripts/vendor.js -->
-		<!-- bower:js -->
-		<script src="bower_components/jquery/dist/jquery.js"></script>
-		<!-- endbower -->
-		<!-- endbuild -->
+<h3><%= appname %></h3>
 
-	</body>
+<!-- @@include('inc/_partial.html', {"hello":"WORLD!"}) -->
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+</body>
 </html>

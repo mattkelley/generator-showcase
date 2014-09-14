@@ -370,7 +370,6 @@ module.exports = function (grunt) {
 				'copy:styles'
 			],
 			dist: [
-				'coffee',
 				'sass',
 				'copy:styles',
 				'imagemin',
