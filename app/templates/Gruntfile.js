@@ -144,7 +144,7 @@ module.exports = function (grunt) {
 					dot: true,
 					src: [
 						'.tmp',
-						'html/*'
+						'html',
 						'html.zip',
 						'<%%= config.dist %>/*',
 						'!<%%= config.dist %>/.git*'
@@ -330,6 +330,18 @@ module.exports = function (grunt) {
 		//   dist: {}
 		// },
 
+		'ftp-deploy': {
+			collab: {
+				auth: {
+					host: 'ftp.ord1-1.websitesettings.com',
+					port: 21,
+					authKey: 'key1'
+				},
+				src: '<%%= config.dist %>',
+				dest: '/verizon/<%= _.slugify(appname) %>',
+				// exclusions: ['<%%= config.dist %>/**/.DS_Store', '<%%= config.dist %>/**/Thumbs.db']
+			}
+		},
 		compress: {
 			dist: {
 				options: {
@@ -448,6 +460,11 @@ module.exports = function (grunt) {
 		'htmlmin',
 		'compress'
 	]);
+
+  grunt.registerTask('deploy', [
+    'build',
+    'ftp-deploy'
+  ]);
 
 	grunt.registerTask('default', [
 		'newer:jshint',

@@ -76,6 +76,10 @@ module.exports = yeoman.generators.Base.extend({
 		this.template('_package.json', 'package.json');
 	},
 
+	passFile: function () {
+		this.template('ftppass', '.ftppass');
+	},
+
 	git: function () {
 		this.template('gitignore', '.gitignore');
 		this.copy('gitattributes', '.gitattributes');
