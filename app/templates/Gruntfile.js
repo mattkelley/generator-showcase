@@ -30,18 +30,6 @@ module.exports = function (grunt) {
 
 		// Watches files for changes and runs tasks based on the changed files
 		watch: {
-			bower: {
-				files: ['bower.json'],
-				tasks: ['wiredep']
-			},<% if (coffee) { %>
-			coffee: {
-				files: ['<%%= config.app %>/scripts/{,*/}*.{coffee,litcoffee,coffee.md}'],
-				tasks: ['coffee:dist']
-			},
-			coffeeTest: {
-				files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
-				tasks: ['coffee:test', 'test:watch']
-			},<% } else { %>
 			js: {
 				files: ['<%%= config.app %>/scripts/{,*/}*.js'],
 				tasks: ['jshint'],
@@ -52,14 +40,14 @@ module.exports = function (grunt) {
 			jstest: {
 				files: ['test/spec/{,*/}*.js'],
 				tasks: ['test:watch']
-			},<% } %>
+			},
 			gruntfile: {
 				files: ['Gruntfile.js']
-			},<% if (includeSass) { %>
+			},
 			sass: {
 				files: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
 				tasks: ['sass:server', 'autoprefixer']
-			},<% } %>
+			},
 			styles: {
 				files: ['<%%= config.app %>/styles/{,*/}*.css'],
 				tasks: ['newer:copy:styles', 'autoprefixer']
@@ -84,13 +72,10 @@ module.exports = function (grunt) {
 				},
 				files: [
 					// '<%%= config.app %>/{,*/}*.html',
-					'.tmp/styles/{,*/}*.css',<% if (coffee) { %>
-					'.tmp/scripts/{,*/}*.js',<% } %>
+					'.tmp/styles/{,*/}*.css',
 					'<%%= config.app %>/images/{,*/}*'
 				]
 			}
-
-
 		},
 		includereplace: {
 			dist: {
@@ -198,39 +183,13 @@ module.exports = function (grunt) {
 					specs: 'test/spec/{,*/}*.js'
 				}
 			}
-		},<% } %><% if (coffee) { %>
-
-		// Compiles CoffeeScript to JavaScript
-		coffee: {
-			dist: {
-				files: [{
-					expand: true,
-					cwd: '<%%= config.app %>/scripts',
-					src: '{,*/}*.{coffee,litcoffee,coffee.md}',
-					dest: '.tmp/scripts',
-					ext: '.js'
-				}]
-			},
-			test: {
-				files: [{
-					expand: true,
-					cwd: 'test/spec',
-					src: '{,*/}*.{coffee,litcoffee,coffee.md}',
-					dest: '.tmp/spec',
-					ext: '.js'
-				}]
-			}
-		},<% } %><% if (includeSass) { %>
-
+		},<% } %>
 		// Compiles Sass to CSS and generates necessary files if requested
 		sass: {
-			options: {<% if (includeLibSass) { %>
+			options: {
 				sourceMap: true,
 				includePaths: ['bower_components']
-				<% } else { %>
-				sourcemap: true,
-				loadPath: 'bower_components'
-			<% } %>},
+				},
 			dist: {
 				files: [{
 					expand: true,
@@ -249,7 +208,7 @@ module.exports = function (grunt) {
 					ext: '.css'
 				}]
 			}
-		},<% } %>
+		},
 
 		// Add vendor prefixed styles
 		autoprefixer: {
@@ -265,19 +224,6 @@ module.exports = function (grunt) {
 				}]
 			}
 		},
-    // Automatically inject Bower components into the HTML file
-    wiredep: {
-      app: {
-        ignorePath: /^<%= config.app %>\/|\.\.\//,
-        src: ['<%%= config.app %>/index.html']<% if (includeBootstrap) { %>,<% if (includeSass) { %>
-        exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']<% } else { %>
-        exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']<% } } %>
-      }<% if (includeSass) { %>,
-      sass: {
-        src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
-        ignorePath: /(\.\.\/){1,2}bower_components\//
-      }<% } %>
-    },
 		// Renames files for browser caching purposes
 		rev: {
 			dist: {
@@ -403,21 +349,7 @@ module.exports = function (grunt) {
 					cwd: '.tmp',
 					src: '{,*/}*.html',
 					dest: '<%%= config.dist %>'
-				}<% if (includeBootstrap) { %>, {
-					expand: true,
-					dot: true,
-					cwd: '<% if (includeSass) {
-							%>.<%
-						} else {
-							%>bower_components/bootstrap/dist<%
-						} %>',
-					src: '<% if (includeSass) {
-							%>bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*<%
-						} else {
-							%>fonts/*<%
-						} %>',
-					dest: '<%%= config.dist %>'
-				}<% } %>]
+				}]
 			},
 			styles: {
 				expand: true,
@@ -426,39 +358,20 @@ module.exports = function (grunt) {
 				dest: '.tmp/styles/',
 				src: '{,*/}*.css'
 			}
-		},<% if (includeModernizr) { %>
-
-		// Generates a custom Modernizr build that includes only the tests you
-		// reference in your app
-		modernizr: {
-			dist: {
-				devFile: 'bower_components/modernizr/modernizr.js',
-				outputFile: '<%%= config.dist %>/scripts/vendor/modernizr.js',
-				files: {
-					src: [
-						'<%%= config.dist %>/scripts/{,*/}*.js',
-						'<%%= config.dist %>/styles/{,*/}*.css',
-						'!<%%= config.dist %>/scripts/vendor/*'
-					]
-				},
-				uglify: true
-			}
-		},<% } %>
+		},
 
 		// Run some tasks in parallel to speed up build process
 		concurrent: {
-			server: [<% if (includeSass) { %>
-				'sass:server',<% } if (coffee) {  %>
-				'coffee:dist',<% } %>
+			server: [
+				'sass:server',
 				'copy:styles'
 			],
-			test: [<% if (coffee) { %>
-				'coffee',<% } %>
+			test: [
 				'copy:styles'
 			],
-			dist: [<% if (coffee) { %>
-				'coffee',<% } if (includeSass) { %>
-				'sass',<% } %>
+			dist: [
+				'coffee',
+				'sass',
 				'copy:styles',
 				'imagemin',
 				'svgmin'
@@ -477,7 +390,6 @@ module.exports = function (grunt) {
 
 		grunt.task.run([
 			'clean:server',
-			'wiredep',
 			'includereplace:dist',
 			'concurrent:server',
 			'autoprefixer',
@@ -509,7 +421,6 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('build', [
 		'clean:dist',
-		'wiredep',
 		'useminPrepare',
 		'concurrent:dist',
 		'autoprefixer',
@@ -517,8 +428,7 @@ module.exports = function (grunt) {
 		'cssmin',
 		'uglify',
 		'includereplace:dist',
-		'copy:dist',<% if (includeModernizr) { %>
-		'modernizr',<% } %>
+		'copy:dist',
 		'rev',
 		'usemin',
 		'htmlmin'
