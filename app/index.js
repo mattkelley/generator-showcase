@@ -85,18 +85,17 @@ module.exports = yeoman.generators.Base.extend({
 		this.copy('gitattributes', '.gitattributes');
 	},
 
-	// bower: function () {
-	//   this.template('_bower.json', 'bower.json');
-	// },
-
 	bower: function () {
 		var bower = {
 			name: this._.slugify(this.appname),
 			private: true,
-			dependencies: {}
+			dependencies: {
+				'jquery': '~1.11.1',
+				'hammerjs': '~2.0.2',
+				'mustache.js': '~0.8.2',
+				'greensock': '~1.13.2'
+			}
 		};
-
-		bower.dependencies.jquery = "~1.11.1";
 
 		this.write('bower.json', JSON.stringify(bower, null, 2));
 	},
