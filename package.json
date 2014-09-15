@@ -1,6 +1,6 @@
 {
   "name": "generator-showcase",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Scaffold tool for Invodo ShowCases",
   "license": "MIT",
   "main": "app/index.js",
