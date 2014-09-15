@@ -2,7 +2,6 @@
 
 ### Installing the generator
 ```
-npm install -g yo
 npm install -g git+https://git@github.com/mattkelley/generator-showcase.git
 ```
 
