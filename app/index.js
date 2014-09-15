@@ -133,12 +133,10 @@ module.exports = yeoman.generators.Base.extend({
 		this.mkdir('app/scripts');
 		this.mkdir('app/styles');
 		this.mkdir('app/images');
-		this.mkdir('app/inc');
-		this.copy('_partial.html', 'app/inc/_partial.html');
+		this.mkdir('app/templates');
+		this.copy('_template.html', 'app/templates/_template.html');
+		this.copy('_main.js', 'app/scripts/main.js');
 		this.write('app/index.html', this.indexFile);
-
-		this.write('app/scripts/main.js', 'console.log(\'\\\'Allo \\\'Allo!\');');
-
 	},
 
 	install: function () {

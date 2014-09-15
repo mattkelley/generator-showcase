@@ -13,9 +13,11 @@
 </head>
 <body>
 
-<h3><%= appname %></h3>
+	<script id="template" type="x-tmpl-mustache">
+		<!-- @@include('templates/_template.html') -->
+	</script>
 
-<!-- @@include('inc/_partial.html', {"hello":"WORLD!"}) -->
+	<div id="all"></div>
 
 	<!-- build:js(.) scripts/vendor.js -->
 	<!-- bower:js -->
